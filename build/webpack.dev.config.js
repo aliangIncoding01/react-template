@@ -6,6 +6,9 @@ const baseWebpackConfig = require('./webpack.config');
 module.exports = merge(baseWebpackConfig, {
     mode: 'development', // 定义环境
     devtool: 'cheap-module-eval-source-map',
+    output: {
+        publicPath: '/'
+    },
     devServer: {
         host: '0.0.0.0',
         port: 3000,
