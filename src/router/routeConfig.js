@@ -1,10 +1,4 @@
-import React from 'react';
-
 import asyncComponent from '@/common/utils/asyncComponent';
-
-// import CategoryEntrance from '../page';
-// import CategoryOne from '../page/categoryOne';
-// import CategoryTwo from '../page/categoryTwo';
 
 const CategoryEntrance = asyncComponent(() => import('../page'));
 const CategoryOne = asyncComponent(() => import('../page/categoryOne'));
