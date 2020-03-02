@@ -1,4 +1,9 @@
 /**
+ * @file 函数处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 防抖动
  *
  * @param {Function} fn 需要防抖动的函数
@@ -89,6 +94,53 @@ export const throttle2 = ({
 };
 
 /**
+ * 节流（相比throttle2，支持动态传入回调）
+ *
+ * 在duration时长内，最多执行length次fn
+ *
+ * @param {Function} fn 需要节流的函数
+ * @param {Number} duration
+ * @param {Number} length
+ * @return {Function} 包装过的支持节流函数
+ */
+
+export const throttle3 = ({
+    fn,
+    duration = 1000,
+    length = 1
+}) => {
+    const queue = [];
+    return (data, onSuccess, onFail) => {
+        const now = Date.now();
+        const first = queue[0];
+
+        if (queue.length < length) {
+            queue.push(now);
+            const result = fn(data);
+            if (typeof onSuccess === 'function') {
+                onSuccess(result);
+            }
+            return result;
+        }
+
+        if (now - first > duration) {
+            queue.shift();
+            queue.push(now);
+            const result = fn(data);
+            if (typeof onSuccess === 'function') {
+                onSuccess(result);
+            }
+            return result;
+        }
+
+        if (typeof onFail === 'function') {
+            return onFail();
+        }
+    };
+};
+
+
+/**
  * 生成自动重试方法
  *
  * 返回的方法在调用时候，将执行传入的方法fn，并在失败时候自动重试
@@ -99,26 +151,26 @@ export const throttle2 = ({
  * @return {Function} 生成的自动重试方法
  */
 export const createRetryer = options => {
-    let {
+    const {
         fn,
         delay = 1000,
-        times = 3,
+        limit = 3,
     } = options;
 
-    return (...args) => (
+    const wrappedFN = (...args) => (
         new Promise((resolve, reject) => {
-            const run = () => {
-                if (times === 0) {
-                    reject(new Error('fail'));
+            const run = error => {
+                if (wrappedFN.retryTimes === limit) {
+                    reject(error);
                     return;
                 }
                 fn(...args)
                     .then(
                         resolve,
-                        () => {
+                        error => {
                             setTimeout(() => {
-                                run();
-                                times--;
+                                wrappedFN.retryTimes++;
+                                run(error);
                             }, delay);
                         }
                     );
@@ -126,6 +178,10 @@ export const createRetryer = options => {
             run();
         })
     );
+
+    wrappedFN.retryTimes = 0;
+
+    return wrappedFN;
 };
 
 /**
@@ -136,9 +192,9 @@ export const createRetryer = options => {
  * @param {Function} fn 返回值为thenable对象的方法
  * @return {Function} 生成数组，第一个元素为失败的原因，第二个元素是结果
  */
-export const catchAwait = fn => (...args) => {
+export const catchAwait = fn => async (...args) => {
     try {
-        return [null, fn(...args)];
+        return [null, await fn(...args)];
     }
     catch (e) {
         return [e];

@@ -1,4 +1,9 @@
 /**
+ * @file DOM 相关
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 是否支持 classList
  *
  * @type {boolean}

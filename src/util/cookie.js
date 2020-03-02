@@ -1,4 +1,9 @@
 /**
+ * @file Cookie 解释
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 解释 cookie
  *
  * @param {string=} [cookie=document.cookie]

@@ -1,4 +1,9 @@
 /**
+ * @file 数值处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 补零
  *
  * @param {number} number 输入的数字

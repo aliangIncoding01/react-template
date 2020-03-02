@@ -1,4 +1,9 @@
 /**
+ * @file 字符串处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 替换字符串中所有空格
  *
  * @param {?string=} input 输入的字符

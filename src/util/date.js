@@ -1,4 +1,9 @@
 /**
+ * @file 日期相关处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 返回指定格式的时间字符串 x月x日
  *
  * @param {string|number} dateStr 可用于构建 Date 实例的字符串或数字(时间戳)
@@ -29,3 +34,34 @@ export const timeHandler = time => time.slice(0, 10).replace(/-/g, '.');
  * @return 替换 '-' 为 formatter 指定的字符后的日期
  */
 export const formatDate = (date, formatter = '/') => date.replace(/-/g, formatter);
+
+/**
+ * 补0
+ */
+const padZero = number => {
+    const blankStr = '';
+    return (blankStr + number).padStart(2, '0');
+};
+
+/**
+ * 格式化时间
+ *
+ * @param {string} timestamp 要处理的时间戳
+ * @return {string} 返回指定 'yyyymmddhhmmss'
+ */
+export const getFormateTimestamp = timestamp => {
+    if (typeof timestamp !== 'number') {
+        return;
+    }
+
+    const toStr = '';
+    const time = new Date(timestamp);
+    const year = time.getFullYear();
+    const month = padZero(time.getMonth() + 1);
+    const day = padZero(time.getDate());
+    const hour = padZero(time.getHours());
+    const min = padZero(time.getMinutes());
+    const sec = padZero(time.getSeconds());
+
+    return (toStr + year + month + day + hour + min + sec);
+};

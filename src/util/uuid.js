@@ -1,3 +1,9 @@
+/**
+ * @file 生成 UUID
+ * @author dafo<huanghouin@baijiahulian.com>
+ * @module util/uuid
+ */
+
 /* eslint-disable no-magic-numbers, prefer-template */
 
 /**

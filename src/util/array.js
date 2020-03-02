@@ -1,4 +1,8 @@
 /**
+ * @file 数组处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+/**
  * underscore 的 findeWhere 方法
  *
  * @param {Array} target 查找的目标数组

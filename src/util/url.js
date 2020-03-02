@@ -1,4 +1,9 @@
 /**
+ * @file URL 处理
+ * @author dafo<huanghoujin@baijiahulian.com>
+ */
+
+/**
  * 提取url后面的参数 返回一个对象
  *
  * @param {URL} url URL 地址

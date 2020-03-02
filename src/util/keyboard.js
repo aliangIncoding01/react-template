@@ -31,7 +31,6 @@ export default (targetElement, listeners) => {
     const callback = e => {
         let shortcut = '';
         let {key, code, keyCode, shiftKey, ctrlKey, altKey} = e;
-
         key = key.toLowerCase();
 
         // 处理字母和数字键
@@ -41,6 +40,9 @@ export default (targetElement, listeners) => {
             shortcut = String.fromCharCode(keyCode).toLowerCase();
         }
         // 处理其他常用字符
+        else if (keyCode === 229) {
+            shortcut = null;
+        }
         else {
             shortcut = code2ShortcutMap[code];
         }
