@@ -104,3 +104,16 @@ export const setHeight = (dom, height) => {
     }
     dom.style.height = `${height}px`;
 };
+
+/**
+ * 找到target上的属性，如果当前元素上找不到，则向上找父节点的属性
+ * @param {HTMLElement} target
+ */
+export const findAttrOnTarget = (target, attrName) => {
+    let limit = 3;
+    while (limit > 0 && typeof target?.dataset?.[attrName] === 'undefined') {
+        target = target.parentElement;
+        limit--;
+    }
+    return target?.dataset?.[attrName];
+};
