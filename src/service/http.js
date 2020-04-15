@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /**
  * @file HTTP 请求统一处理
- * @author dafo<huanghoujin@baijiahulian.com>
+ *
  */
 import axios from 'axios';
 import {camelCaseObject, snakeCaseObject} from '~/util/string';
